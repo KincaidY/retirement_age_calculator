@@ -25,7 +25,7 @@ function invest_sim(
     capital = initial_savings
     year = start_year
     age = initial_age
-    salary = starting_salary
+    salary = post_tax_salary
     ret_sal = withdraw * capital
     
     while (ret_sal < thresh)
