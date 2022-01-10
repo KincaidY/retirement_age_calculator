@@ -47,6 +47,11 @@ else
     thresh = parse(Float64, readline())
     print("Proportion of capital to live on: ")
     withdraw = parse(Float64, readline())
+    print("Age to stop saving? (enter 'None' if saving until retirement): ")
+    stop_saving_age = parse(Float64, readline())
+    if stop_savings_age == "None"
+        stop_savings_age = 999
+    end
 
     params = Dict(
         :post_tax_salary => post_tax_salary,
@@ -57,6 +62,7 @@ else
         :historical_data => data,
         :thresh => thresh,
         :withdraw => withdraw,
+        :stop_savings_age => stop_savings_age,
         :bonds_percent => bonds
     )
 end

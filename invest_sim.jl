@@ -18,6 +18,7 @@ function invest_sim(
     thresh,
     withdraw,
     start_year,
+    stop_savings_age,
     historical_data,
     bonds_percent="dynamic"
     )
@@ -30,7 +31,9 @@ function invest_sim(
     
     while (ret_sal < thresh)
         capital += returns(capital, age, year, historical_data, bonds_percent)
-        capital += post_tax_salary * investment_rate
+        if age < stop_savings_age 
+            capital += post_tax_salary * investment_rate
+        end
         salary += salary * salary_growth
         age += 1
         year += 1
@@ -54,6 +57,7 @@ function repeat_sim(;
     initial_age,
     thresh,
     withdraw,
+    stop_savings_age,
     historical_data,
     bonds_percent="dynamic"
     )
@@ -62,7 +66,7 @@ function repeat_sim(;
     age = true
     year = minimum(historical_data["year"])
     while age != false
-        age = invest_sim(post_tax_salary, investment_rate, salary_growth, initial_savings, initial_age, thresh, withdraw, year, historical_data, bonds_percent)
+        age = invest_sim(post_tax_salary, investment_rate, salary_growth, initial_savings, initial_age, thresh, withdraw, year, stop_savings_age, historical_data, bonds_percent)
         year += 1
         if age != false
             append!(ages,[age])
