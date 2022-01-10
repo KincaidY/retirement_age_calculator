@@ -1,5 +1,6 @@
 import CSV
 import Statistics: mean, std
+import StatsBase: percentile
 import JSON
 import StatsPlots: histogram
 
@@ -75,6 +76,9 @@ results = repeat_sim(;params...)
 println("\nAverage retirement age: ", mean(results))
 println("Standard deviation: ", std(results))
 println("Max retirement age: ", maximum(results))
+println("90th percentile retirement age: ", percentile(results, 95))
+println("75th percentile retirement age: ", percentile(results, 75))
+println("Median retirement age: ", percentile(results, 50))
 println("Min retirement age: ", minimum(results))
 print(length(results), " simulations run")
 histogram(results,bins=length(results) ÷ 5, title="Financial Independence Age Distribution", legend=false)
